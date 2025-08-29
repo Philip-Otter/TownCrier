@@ -35,6 +35,8 @@ class crier:
 
     def write_crier_exception(self, e) -> None:
         try:
+            if(not self.verbose):
+                return
             exceptionColor = "RED"
             exceptionPrefix = "CRIER ERROR:  "
 
@@ -50,6 +52,8 @@ class crier:
 
     def write_message(self, stringMessage: str, intDepth: int) -> None:
         try:
+            if(not self.verbose):
+                return
 
             if (not self.colorize):
                 self.write_bland_message(stringMessage, intDepth)
@@ -65,6 +69,9 @@ class crier:
 
     def write_bland_message(self, stringMessage: str, intDepth: int) -> None:
         try:
+            if(not self.verbose):
+                return
+
             self.check_depth(intDepth)
             print(f'{self.get_timestamp()}{self.prefix} {stringMessage}')
 
@@ -74,6 +81,9 @@ class crier:
     
     def set_color(self, color: str) -> None:
         try:
+            if(not self.verbose):
+                return
+
             if (type(color) == str):
                 if (color.upper() in self.colorCodes):
                     self.color = self.colorCodes[color.upper()]
@@ -100,6 +110,9 @@ class crier:
 
     def reset_color(self) -> str:
         try:
+            if(not self.verbose):
+                return ''
+
             self.color = self.colorCodes["RESET"]
         except Exception as e:
             self.write_crier_exception(e)
@@ -109,6 +122,9 @@ class crier:
 
     def build_prefix(self, intDepth: int) -> None:
         try:
+            if(not self.verbose):
+                return
+
             self.prefix = (self.primaryPrefix * intDepth) + self.secondaryPrefix
         except Exception as e:
             self.write_crier_exception(e)
@@ -116,6 +132,9 @@ class crier:
 
     def set_prefix(self, charPrimary: str, charSecondary: str) -> None:
         try:
+            if(not self.verbose):
+                return
+
             self.primaryPrefix = charPrimary
             self.secondaryPrefix = charSecondary
     
@@ -125,6 +144,9 @@ class crier:
 
     def get_timestamp(self) -> str:
         try:
+            if(not self.verbose):
+                return ''
+
             now = datetime.now()
 
             return f'[{now.strftime(self.timestampFormat)}]'
@@ -133,8 +155,11 @@ class crier:
             self.write_crier_exception(e)
     
 
-    def check_depth(self, intDepth):
+    def check_depth(self, intDepth: int) -> None:
         try:
+            if(not self.verbose):
+                return
+
             if (self.depth != intDepth):
                 self.depth = intDepth
 
@@ -147,8 +172,11 @@ class crier:
             self.write_crier_exception(e)
     
 
-    def dump_object(self, object):
+    def dump_object(self, object) -> None:
         try:
+            if(not self.verbose):
+                return
+
             if (self.colorize):
                 print(f'{self.color}Hear Ye! Hear Ye! Behold The Object {object} {json.dumps(self.__dict__, indent=4)}{self.reset_color()}')
             else:
