@@ -178,9 +178,9 @@ class crier:
                 return
 
             if (self.colorize):
-                print(f'{self.color}Hear Ye! Hear Ye! Behold The Object {object} {json.dumps(self.__dict__, indent=4)}{self.reset_color()}')
+                print(f'{self.color}Hear Ye! Hear Ye! Behold The Object {object} {json.dumps(object.__dict__, indent=4)}{self.reset_color()}')
             else:
-                print(f'Hear Ye! Hear Ye! Behold The Object {object} {json.dumps(self.__dict__, indent=4)}')
+                print(f'Hear Ye! Hear Ye! Behold The Object {object} {json.dumps(object.__dict__, indent=4)}')
         
         except Exception as e:
             self.write_crier_exception(e)
